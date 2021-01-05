@@ -2,12 +2,11 @@ package ru.imatveev.weather.web.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.imatveev.weather.domain.WeatherCore;
 import ru.imatveev.weather.entity.WeatherEntity;
+import ru.imatveev.weather.enums.Mode;
+import ru.imatveev.weather.enums.Units;
 import ru.imatveev.weather.web.WeatherClient;
 
 @RestController
@@ -18,7 +17,25 @@ public class WeatherClientImpl implements WeatherClient {
 
     @Override
     @GetMapping("/{location}")
-    public ResponseEntity<WeatherEntity> getWeather(@PathVariable String location) {
-        return ResponseEntity.of(weatherCore.getWeather(location));
+    public ResponseEntity<WeatherEntity> getWeather(
+            @PathVariable String location,
+            @RequestParam(required = false) Integer lat,
+            @RequestParam(required = false) Integer lon,
+            @RequestParam(required = false) String callback,
+            @RequestParam(required = false) String cityId,
+            @RequestParam(required = false, defaultValue = "ru") String lang,
+            @RequestParam(required = false, defaultValue = "metric") Units units
+    ) {
+        return ResponseEntity.of(weatherCore.getWeather(
+                location,
+                lat,
+                lon,
+                callback,
+                cityId,
+                lang,
+                units,
+                Mode.JSON
+                )
+        );
     }
 }

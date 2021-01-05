@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.imatveev.weather.domain.WeatherCore;
 import ru.imatveev.weather.entity.WeatherEntity;
+import ru.imatveev.weather.enums.Mode;
+import ru.imatveev.weather.enums.Units;
 import ru.imatveev.weather.service.WeatherService;
 
 import java.util.Optional;
@@ -21,13 +23,24 @@ public class WeatherCoreImpl implements WeatherCore {
     private String units;
 
     @Override
-    public Optional<WeatherEntity> getWeather(String location) {
+    public Optional<WeatherEntity> getWeather(String location,
+                                              Integer lat,
+                                              Integer lon,
+                                              String callback,
+                                              String cityId,
+                                              String lang,
+                                              Units units,
+                                              Mode mode
+    ) {
         return weatherService.getCurrentWeatherData(
                 location,
+                lat,
+                lon,
+                callback,
+                cityId,
                 lang,
                 units,
-                null,
-                null
+                mode
         );
     }
 }
