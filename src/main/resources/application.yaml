@@ -1,0 +1,7 @@
+weather:
+  uri: https://community-open-weather-map.p.rapidapi.com
+  units: metric
+  lang: ru
+security:
+  key: X-RapidAPI-Key
+  value: aa40f91989msh5da0b99dbbdf37cp1917c3jsnd43f2a421273
